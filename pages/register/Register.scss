@@ -1,0 +1,135 @@
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding: 50px 20px;
+
+  form {
+    width: 960px;
+    padding: 60px 50px;
+    display: flex;
+    gap: 80px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    h1 {
+      color: #333;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .left,
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      justify-content: flex-start;
+
+      label {
+        color: #555;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      input,
+      textarea {
+        padding: 15px 20px;
+        border: 1px solid #dcdcdc;
+        border-radius: 12px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        &:focus {
+          border-color: #1dbf73;
+          box-shadow: 0 0 10px rgba(29, 191, 115, 0.2);
+        }
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      button {
+        margin-top: 20px;
+        border: none;
+        padding: 15px;
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        background: linear-gradient(135deg, #1dbf73, #0da45c);
+        cursor: pointer;
+        border-radius: 12px;
+        transition: 0.3s;
+        &:hover {
+          background: linear-gradient(135deg, #0da45c, #1dbf73);
+          box-shadow: 0 5px 15px rgba(29, 191, 115, 0.3);
+        }
+      }
+
+      .toggle {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 10px;
+
+        label {
+          font-weight: 500;
+          color: #555;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 26px;
+
+          input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 26px;
+
+            &:before {
+              position: absolute;
+              content: "";
+              height: 20px;
+              width: 20px;
+              left: 3px;
+              bottom: 3px;
+              background-color: #fff;
+              transition: 0.4s;
+              border-radius: 50%;
+            }
+          }
+
+          input:checked + .slider {
+            background: #1dbf73;
+          }
+
+          input:checked + .slider:before {
+            transform: translateX(24px);
+          }
+
+          input:focus + .slider {
+            box-shadow: 0 0 5px rgba(29, 191, 115, 0.5);
+          }
+        }
+      }
+    }
+  }
+}

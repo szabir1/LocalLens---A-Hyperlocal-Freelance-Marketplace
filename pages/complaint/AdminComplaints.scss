@@ -1,0 +1,66 @@
+.adminComplaints {
+    padding: 40px;
+    font-family: "Montserrat", sans-serif;
+  
+    h1 {
+      text-align: center;
+      color: #1dbf73;
+      margin-bottom: 30px;
+    }
+  
+    .complaintList {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .complaintCard {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  
+      .info p {
+        margin: 5px 0;
+      }
+  
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+  
+        textarea {
+          flex: 1;
+          padding: 10px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+          resize: none;
+        }
+  
+        button {
+          padding: 10px 15px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 500;
+          transition: all 0.2s ease;
+  
+          &:hover {
+            opacity: 0.9;
+          }
+  
+          &.delete {
+            background-color: #ff4d4d;
+            color: white;
+          }
+  
+          &:not(.delete) {
+            background-color: #1dbf73;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  

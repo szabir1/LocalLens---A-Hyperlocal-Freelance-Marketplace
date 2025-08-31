@@ -1,0 +1,154 @@
+.featured {
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Modern teal/blue gradient */
+  color: white;
+  font-family: 'Inter', sans-serif;
+
+  .container {
+    width: 1400px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+
+      h1 {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.2;
+
+        span {
+          font-style: italic;
+          font-weight: 400;
+          color: #4fd1c5; /* Softer modern teal accent */
+        }
+      }
+
+      .search {
+        display: flex;
+        background-color: rgba(255, 255, 255, 0.95); /* Brighter for readability */
+        padding: 5px;
+        border-radius: 10px;
+        backdrop-filter: blur(4px);
+        width: 100%;
+        max-width: 500px;
+        overflow: hidden;
+
+        .searchInput {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex: 1;
+
+          img {
+            width: 20px;
+            height: 20px;
+            filter: invert(0); /* Dark icon since bg is light */
+            margin-left: 10px;
+          }
+
+          input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            color: #2d3748; /* Dark text for visibility */
+            background: transparent;
+
+            &::placeholder {
+              color: rgba(0, 0, 0, 0.5); /* Visible placeholder */
+            }
+          }
+        }
+
+        button {
+          width: 120px;
+          background-color: #4fd1c5; /* Accent color */
+          color: white;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #38b2ac;
+          }
+        }
+      }
+
+      .popular {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+
+        span {
+          font-size: 14px;
+          background-color: rgba(255, 255, 255, 0.2);
+          padding: 5px 10px;
+          border-radius: 20px;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #4fd1c5;
+            cursor: pointer;
+          }
+        }
+
+        button {
+          font-size: 14px;
+          border: 1px solid white;
+          padding: 5px 10px;
+          border-radius: 20px;
+          background-color: transparent;
+          color: white;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #4fd1c5;
+            border-color: #4fd1c5;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .right {
+      flex: 1;
+      height: 100%;
+      position: relative;
+
+      img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        transition: transform 0.5s ease;
+
+        &:hover {
+          transform: translateY(-10px) scale(1.02);
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to left, rgba(0,0,0,0.2), transparent);
+        border-radius: 15px;
+        pointer-events: none;
+      }
+    }
+  }
+}

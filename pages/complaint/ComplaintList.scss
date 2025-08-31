@@ -1,0 +1,92 @@
+.complaint-list {
+    padding: 40px;
+    font-family: "Montserrat", sans-serif;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  
+    h2 {
+      text-align: center;
+      color: #1dbf73;
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+  
+    .complaint-card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 25px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e0e0e0;
+  
+      p {
+        font-size: 16px;
+        color: #333;
+        margin: 6px 0;
+  
+        strong {
+          color: #1dbf73;
+        }
+      }
+  
+      input {
+        width: 100%;
+        padding: 12px 15px;
+        margin-top: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+  
+        &:focus {
+          outline: none;
+          border-color: #1dbf73;
+          box-shadow: 0 0 5px rgba(29, 191, 115, 0.3);
+        }
+      }
+  
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background-color: #1dbf73;
+        color: white;
+        transition: all 0.3s ease;
+  
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(29, 191, 115, 0.4);
+        }
+      }
+    }
+  
+    p {
+      margin-bottom: 5px;
+    }
+  
+    @media (max-width: 768px) {
+      padding: 20px;
+  
+      h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+      }
+  
+      .complaint-card {
+        padding: 20px 15px;
+  
+        input {
+          font-size: 13px;
+        }
+  
+        button {
+          font-size: 14px;
+          padding: 8px 15px;
+        }
+      }
+    }
+  }
+  
