@@ -3,51 +3,90 @@ import createError from "../utils/createError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const register= async(req,res,next)=>{
-    try{
-        const hash= bcrypt.hashSync(req.body.password, 5);
-        const newUser= new User({
-            ...req.body,
-            password: hash,           
-        });
+// REGISTER
+export const register = async (req, res, next) => {
+  try {
+    const hash = bcrypt.hashSync(req.body.password, 5);
 
-        await newUser.save();
-        res.status(201).send("User has been created");
+    const newUser = new User({
+      ...req.body,
+      password: hash,
+      role: "buyer",      // Default role is buyer
+      isBanned: false,    // Default not banned
+      isSeller: false,    // Default not seller
+    });
 
-    }   catch(err) {
-        next(err)
-    }
+    await newUser.save();
+    res.status(201).json({ message: "User has been created" });
+  } catch (err) {
+    console.error("Register error:", err);
+    next(err);
+  }
 };
-export const login= async(req,res,next)=>{
-    try{
-        const user=await User.findOne({username:req.body.username});
 
-        if (!user) return next(createError(404,"User not found"));
+// LOGIN
+export const login = async (req, res, next) => {
+  try {
+    console.log("Login attempt username:", req.body.username); // DEBUG
 
-        const isCorrect =bcrypt.compareSync(req.body.password, user.password);
-        if (!isCorrect) return next(createError(404,"Wrong password or username"));
+    const user = await User.findOne({ username: req.body.username });
+    console.log("User found:", user); // DEBUG
 
-        const token =jwt.sign({
-            id: user._id,
-            isSeller:user.isSeller,
-        },
-        process.env.JWT_KEY
-        ); 
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-        const{password,...info}=user._doc
-        res.cookie("accessToken",token, {
-            httpOnly: true,   
-        })
-        .status(200)
-        .send(info);
-    }catch(err){
-        next(err);
+    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+    if (!isCorrect) return res.status(400).json({ message: "Wrong password" });
+
+    if (user.isBanned) {
+      return res.status(403).json({ message: "You have been banned by admin" });
     }
 
+    // Create JWT
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+        isSeller: user.isSeller,
+      },
+      process.env.JWT_KEY,
+      { expiresIn: "1d" }
+    );
+
+    // Return only safe fields
+    const safeUser = {
+      _id: user._id,
+      username: user.username,
+      role: user.role,
+      isSeller: user.isSeller,
+      img: user.img || null,
+    };
+
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json(safeUser);
+
+  } catch (err) {
+    console.error("Login error:", err);
+    next(err);
+  }
 };
-export const logout= async(req,res)=>{
-    res.clearCookie("accessToken",{
-        sameSite:"none",
-        secure:true,
-    }).status(200).send("User has been logged out");
+
+// LOGOUT
+export const logout = async (req, res) => {
+  try {
+    res
+      .clearCookie("accessToken", {
+        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json({ message: "User has been logged out" });
+  } catch (err) {
+    console.error("Logout error:", err);
+  }
 };
