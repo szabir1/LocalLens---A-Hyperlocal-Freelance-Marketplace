@@ -1,2 +1,2 @@
 # Freelance-Marketplace
-Mern Project
+Software project Using Mern
